@@ -1,0 +1,15 @@
+program TempWin;
+
+uses
+  Forms,
+  uMain in 'uMain.pas' {Main},
+  uDebug in 'uDebug.pas' {Debug};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TMain, Main);
+  Application.CreateForm(TDebug, Debug);
+  Application.Run;
+end.
