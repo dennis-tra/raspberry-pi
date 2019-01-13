@@ -17,7 +17,7 @@ AFLAGS    = -DOS_$(OS)
 CFLAGS    = -Wall -g -O2 -DOS_$(OS)
 CFLAGS   += -fno-strict-aliasing
 CFLAGS   += -MD -MP -MF $(DEP)/$(@F).d
-LIBS      = `pkg-config libusb-1.0 libudev --libs`
+LIBS      = `pkg-config libusb-1.0 libudev --libs` -lusb
 INCLUDES  = `pkg-config libusb-1.0 --cflags`
 else ifeq ($(OS), WINDOWS)
 TPATH     = windows
@@ -46,9 +46,9 @@ all: $(PROG)
 
 $(PROG): $(COBJ) $(AOBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ $(LIBS) -o $(PROG)
-	@$(SIZE) -B $(PROG).exe
-	@$(NM) -n $(PROG).exe > $(PROG).sym
-	@$(STRIP) $(PROG).exe
+	# @$(SIZE) -B $(PROG).exe
+	# @$(NM) -n $(PROG).exe > $(PROG).sym
+	# @$(STRIP) $(PROG).exe
 
 $(PROG).exe: $(PROG)
 	@cp $(PROG) $(PROG).exe
